@@ -4,8 +4,19 @@ codeunit 50100 "Commission Management"
 {
     procedure CalculateCommission(Var CustomerCommission: Record "Customer Commission")
     var
-        myInt: Integer;
+        ishandled: Boolean;
     begin
-        CustomerCommission."commision Amount" := (CustomerCommission."Commission Percentage" / 100) * CustomerCommission."Total Amount";
+        OnBeforeCalculateCommission(CustomerCommission, ishandled);
+        if ishandled then
+            message('Check')
+        else
+            CustomerCommission."commision Amount" := (CustomerCommission."Commission Percentage" / 100) * CustomerCommission."Total Amount";
+    end;
+
+
+    [IntegrationEvent(false, false)]
+    procedure OnBeforeCalculateCommission(Var CustomerCommission: Record "Customer Commission"; Var ishandled: Boolean)
+    begin
     end;
 }
+
