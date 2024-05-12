@@ -16,6 +16,9 @@ tableextension 50100 "Customer Ext" extends Customer
             Caption = 'Total Commission';
             DataClassification = ToBeClassified;
             Editable = false;
+            //FieldClass = FlowField;
+            //CalcFormula = sum("Customer Commission"."commision Amount" where("Customer No" = field("No.")));
+
         }
         field(50102; Comments; Text[100])
         {
